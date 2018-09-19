@@ -190,6 +190,20 @@ public class PermisoWrapper {
         _getPermission(context, listener, rationaleStringResourceArrayList, Manifest.permission.ACCESS_COARSE_LOCATION);
     }
 
+    public static void getPermissionAccessCallLog(final Context context, final PermissionListener listener) {
+        ArrayList<Integer> rationaleStringResourceArrayList = new ArrayList<>();
+        rationaleStringResourceArrayList.add(R.string.ncutils_permission_rationale_feature_access_contacts);
+        _getPermission(context, listener, rationaleStringResourceArrayList,
+                Manifest.permission.WRITE_CALL_LOG,
+                Manifest.permission.READ_CALL_LOG);
+    }
+
+    public static void getPermissionAccessContactsWithReadOrWrite(final Context context, final PermissionListener listener) {
+        ArrayList<Integer> rationaleStringResourceArrayList = new ArrayList<>();
+        rationaleStringResourceArrayList.add(R.string.ncutils_permission_rationale_feature_access_contacts);
+        _getPermission(context, listener, rationaleStringResourceArrayList, Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS);
+    }
+
     private static void _getPermission(final Context context, final PermissionListener listener, final ArrayList<Integer> rationaleStringResourceArrayList, final String... permissions) {
         Permiso.getInstance().requestPermissions(new Permiso.IOnPermissionResult() {
             @Override
@@ -437,7 +451,7 @@ public class PermisoWrapper {
             } else if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
                 return PermissionStatus.NEVER_SHOW_AGAIN;
             } else {
-                permissionsStatus =  PermissionStatus.DENIED;
+                permissionsStatus = PermissionStatus.DENIED;
             }
         }
 
